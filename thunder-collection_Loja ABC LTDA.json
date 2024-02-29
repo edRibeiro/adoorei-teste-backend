@@ -1,0 +1,50 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Loja ABC LTDA",
+    "dateExported": "2024-02-29T21:09:05.702Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "b248c80e-51d7-4bbe-860e-30c1a3f644c2",
+            "name": "Products",
+            "containerId": "",
+            "created": "2024-02-29T18:23:29.076Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "0cec4172-939a-4f94-ba6e-c1fbabd0b7e2",
+            "colId": "0a2c978f-e9cd-4e8d-8485-6d67a0e902f7",
+            "containerId": "b248c80e-51d7-4bbe-860e-30c1a3f644c2",
+            "name": "Find All",
+            "url": "http://localhost/api/products",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-02-29T18:23:40.411Z",
+            "modified": "2024-02-29T18:24:19.519Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2850974f-f6e6-45eb-adab-6808eb69d498",
+            "colId": "0a2c978f-e9cd-4e8d-8485-6d67a0e902f7",
+            "containerId": "b248c80e-51d7-4bbe-860e-30c1a3f644c2",
+            "name": "Create",
+            "url": "http://localhost/api/products",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-02-29T20:38:45.903Z",
+            "modified": "2024-02-29T21:06:55.667Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Celular 1\",\n  \"price\": 1.800,\n  \"description\": \"Lorenzo Ipsulum\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
