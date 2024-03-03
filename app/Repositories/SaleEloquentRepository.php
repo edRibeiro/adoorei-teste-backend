@@ -35,11 +35,13 @@ class SaleEloquentRepository implements SaleRepositoryInterface
         return SaleDto::fromEloquent($saleEloquent);
     }
 
-    public function update(Sale $sale): void
+    public function update(SaleDto $sale): void
     {
     }
 
     public function delete(int $sale_id): void
     {
+        $sale = SaleModel::query()->findOrFail($sale_id);
+        $sale->delete();
     }
 }

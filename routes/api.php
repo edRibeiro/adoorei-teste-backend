@@ -24,6 +24,7 @@ Route::controller(SaleController::class)->group(function () {
     Route::get('/sales', 'index');
     Route::post('/sales', 'store');
     Route::get('/sales/{id}', 'show');
+    Route::delete('/sales/{id}', 'destroy');
 });
 
 /* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

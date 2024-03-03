@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Exceptions\EntityNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Mappers\SaleMapper;
+use App\UseCases\Sales\Commands\DestroySaleCommand;
 use App\UseCases\Sales\Commands\StoreSaleCommand;
 use App\UseCases\Sales\Queries\FindAllSalesQuery;
 use App\UseCases\Sales\Queries\FindSaleByIdQuery;
@@ -63,8 +65,13 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        try {
+            (new DestroySaleCommand($id))->execute();
+            return response()->success(null, Response::HTTP_NO_CONTENT);
+        } catch (EntityNotFoundException $e) {
+            return response()->error($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
     }
 }
