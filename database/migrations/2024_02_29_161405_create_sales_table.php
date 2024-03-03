@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id('id');
             $table->decimal('amount', 8, 2);
-            $table->string('status')->default('pending');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
