@@ -38,6 +38,23 @@ class SaleEloquentRepository implements SaleRepositoryInterface
         });
     }
 
+    public function update(SaleDto $sale): void
+    {
+        $saleEloquent = SaleModel::query()->findOrFail($sale->sale_id);
+        $saleEloquent->products()->detach();
+        foreach ($sale->products as $product) {
+            $saleEloquent->products()->attach([$product->product_id => ['amount' => $product->amount]]);
+        }
+        $saleEloquent->load('products');
+        $saleEloquent->products->reduce(fn ($total, $product) => ($total + ($product->price * $product->pivot->amount)));
+        /* $saleEloquent->amount = array_reduce(
+            $saleEloquent->products,
+            fn ($total, $product) => ($total + ($product->price * $product->pivot->amount)),
+            0.0
+        ); */
+        $saleEloquent->save();
+    }
+
     public function delete(int $sale_id): void
     {
         $sale = SaleModel::query()->findOrFail($sale_id);

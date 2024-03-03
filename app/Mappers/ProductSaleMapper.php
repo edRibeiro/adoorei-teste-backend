@@ -12,9 +12,7 @@ class ProductSaleMapper
 {
     public static function fromEloquent(ProductModel $product, int $amount): ProductSale
     {
-        logger('Model Product', [$product]);
         $product = new ProductSale($product->id, new Name($product->name), new Price($product->price), $amount);
-        logger('Entity Product', [$product]);
         return $product;
     }
 

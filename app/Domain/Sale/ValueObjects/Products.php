@@ -29,7 +29,7 @@ final class Products extends DomainValueObjectArray
 
     public function update(ProductSale $newProduct): void
     {
-        $productIds = array_column($this->products, 'id');
+        $productIds = array_column($this->products, 'product_id');
         if (!in_array($newProduct->product_id, $productIds)) {
             throw new EntityNotFoundException('Product not found');
         }

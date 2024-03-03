@@ -23,9 +23,7 @@ class Sale extends AggregateRoot
 
     public function addProduct(ProductSale $product): void
     {
-        logger('addProduct', [$product]);
         $this->products->add($product);
-        logger('add Product', [$this->products]);
     }
     public function updateProduct(ProductSale $newProduct): void
     {

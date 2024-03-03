@@ -43,7 +43,7 @@ class SaleDto
                 return ProductSaleMapper::fromArray($product);
             }, self::verifyProductsFromRequest($request))
         );
-        $amount = array_reduce($products->toArray(), fn ($total, $product) => ($total + $product->getTotal()), 0);
+        $amount = array_reduce($products->getProducts(), fn ($total, $product) => ($total + $product->getTotal()), 0);
         return new self(
             amount: $amount,
             products: $products,
@@ -70,5 +70,10 @@ class SaleDto
             throw new MinimumValueException('products', '1');
         }
         return $productsRequest;
+    }
+
+    public function getProducts(): array
+    {
+        return $this->products->getProducts();
     }
 }

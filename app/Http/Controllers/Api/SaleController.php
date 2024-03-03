@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Exceptions\EntityNotFoundException;
+use App\Dtos\SaleDto;
 use App\Http\Controllers\Controller;
 use App\Mappers\SaleMapper;
+use App\UseCases\Sales\Commands\AddProductFromSaleCommand;
 use App\UseCases\Sales\Commands\DestroySaleCommand;
 use App\UseCases\Sales\Commands\StoreSaleCommand;
 use App\UseCases\Sales\Queries\FindAllSalesQuery;
@@ -57,9 +59,15 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $sale = SaleDto::fromRequest($request, $id);
+            (new AddProductFromSaleCommand($sale))->execute();
+            return response()->success((new FindSaleByIdQuery($id))->handle());
+        } catch (\DomainException $domainException) {
+            return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 
     /**
