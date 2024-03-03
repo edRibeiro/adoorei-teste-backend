@@ -44,4 +44,9 @@ class Sale extends AggregateRoot
             'products' => $this->products->toArray()
         ];
     }
+
+    public function getProducts(): array
+    {
+        return $this->products->getProducts();
+    }
 }

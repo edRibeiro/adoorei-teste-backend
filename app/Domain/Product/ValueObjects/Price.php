@@ -33,4 +33,9 @@ final class Price extends ValueObject
     {
         return $this->price . '';
     }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
 }

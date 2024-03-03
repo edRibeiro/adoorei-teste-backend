@@ -31,7 +31,7 @@ final class Products extends DomainValueObjectArray
     {
         $productIds = array_column($this->products, 'id');
         if (!in_array($newProduct->product_id, $productIds)) {
-            throw new EntityNotFoundException('ProductEntity not found');
+            throw new EntityNotFoundException('Product not found');
         }
         $this->offsetSet(array_search($newProduct->product_id, $productIds), $newProduct);
     }
@@ -40,7 +40,7 @@ final class Products extends DomainValueObjectArray
     {
         $productIds = array_column($this->products, 'id');
         if (!in_array($product_id, $productIds)) {
-            throw new EntityNotFoundException('ProductEntity not found');
+            throw new EntityNotFoundException('Product not found');
         }
         $this->offsetUnset(array_search($product_id, $productIds));
     }
@@ -53,5 +53,10 @@ final class Products extends DomainValueObjectArray
     public function toArray(): array
     {
         return array_map(fn ($product) => $product->toArray(), $this->products);
+    }
+
+    public function getProducts(): array
+    {
+        return $this->products;
     }
 }

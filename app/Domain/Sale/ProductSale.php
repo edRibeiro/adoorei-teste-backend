@@ -45,4 +45,14 @@ final class ProductSale extends AggregateRoot
             'amount' => $this->amount
         ];
     }
+
+    function getPrice(): float
+    {
+        return $this->price->getPrice();
+    }
+
+    function getTotal(): float
+    {
+        return self::getPrice() * floatval($this->amount);
+    }
 }
