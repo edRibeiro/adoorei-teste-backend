@@ -10,6 +10,5 @@ interface SaleRepositoryInterface
     public function findAll(): array;
     public function findById(int $id): Sale|null;
     public function store(Sale $sale): SaleDto;
-    public function update(SaleDto $sale): void;
     public function delete(int $sale_id): void;
 }
