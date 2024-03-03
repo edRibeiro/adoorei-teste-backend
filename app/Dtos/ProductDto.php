@@ -23,10 +23,10 @@ class ProductDto
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['product_id'],
             $data['name'],
             $data['price'],
-            $data['description']
+            $data['description'],
+            isset($data['product_id']) ? $data['product_id'] : null
         );
     }
 
