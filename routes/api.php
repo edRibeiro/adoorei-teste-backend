@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index');
     Route::post('/products', 'store');
+});
+Route::controller(SaleController::class)->group(function () {
+    Route::get('/sales', 'index');
+    Route::post('/sales', 'store');
+    Route::get('/sales/{id}', 'show');
 });
 
 /* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
