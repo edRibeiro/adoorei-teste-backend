@@ -22,8 +22,8 @@ Route::controller(ProductController::class)->group(function () {
 });
 Route::controller(SaleController::class)->group(function () {
     Route::get('/sales', 'index');
-    Route::get('/sales/{id}', 'show');
     Route::post('/sales', 'store');
+    Route::get('/sales/{id}', 'show');
     Route::put('/sales/{id}/products', 'update');
     Route::delete('/sales/{id}', 'destroy');
 });

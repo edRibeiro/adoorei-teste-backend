@@ -11,6 +11,32 @@ use App\Domain\Exceptions\RequiredException;
 use App\Domain\Product\ValueObjects\Name;
 use App\Domain\Product\ValueObjects\Price;
 
+/**
+ * @OA\Schema(
+ *     schema="ProductSale",
+ *     @OA\Property(
+ *         property="product_id",
+ *         type="integer",
+ *         description="ID do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nome do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="price",
+ *         type="number",
+ *         format="float",
+ *         description="Preço do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="amount",
+ *         type="integer",
+ *         description="Quantidade do produto"
+ *     )
+ * )
+ */
 final class ProductSale extends AggregateRoot
 {
     public int $product_id;

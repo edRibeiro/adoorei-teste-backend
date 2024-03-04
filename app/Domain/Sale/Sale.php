@@ -8,6 +8,27 @@ use App\Domain\AggregateRoot;
 use App\Domain\Sale\ValueObjects\Products;
 use App\Domain\Sale\ValueObjects\Amount;
 
+/**
+ * @OA\Schema(
+ *     schema="Sale",
+ *     @OA\Property(
+ *         property="sale_id",
+ *         type="integer",
+ *         description="ID da venda"
+ *     ),
+ *     @OA\Property(
+ *         property="amount",
+ *         type="number",
+ *         format="float",
+ *         description="Valor total da venda"
+ *     ),
+ *     @OA\Property(
+ *         property="products",
+ *         type="array",
+ *         @OA\Items(ref="#/components/schemas/ProductSale")
+ *     )
+ * )
+ */
 class Sale extends AggregateRoot
 {
     public ?int $id;

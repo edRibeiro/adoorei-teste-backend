@@ -9,6 +9,34 @@ use App\Domain\Product\ValueObjects\Name;
 use App\Domain\Product\ValueObjects\Price;
 use App\Domain\Product\ValueObjects\Description;
 
+/**
+ * @OA\Schema(
+ *     schema="Product",
+ *     title="Product",
+ *     description="Schema para representar um produto",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         description="ID do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nome do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="price",
+ *         type="number",
+ *         format="float",
+ *         description="Preço do produto"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descrição do produto"
+ *     )
+ * )
+ */
 class Product extends Entity
 {
     public ?int $product_id;

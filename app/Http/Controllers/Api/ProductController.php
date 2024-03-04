@@ -14,7 +14,23 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/products",
+     *     summary="Retorna todos os produtos cadastrados",
+     *     tags={"Products"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem-sucedida",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Product")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function index()
     {
@@ -26,7 +42,36 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/products",
+     *     summary="Cria um novo produto",
+     *     tags={"Products"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Dados do produto",
+     *         @OA\JsonContent(
+     *             required={"name", "price"},
+     *             @OA\Property(property="name", type="string", example="Produto A"),
+     *             @OA\Property(property="price", type="number", format="float", example=50.00)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Produto criado com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Entidade não processável",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="O campo name é obrigatório.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function store(Request $request)
     {

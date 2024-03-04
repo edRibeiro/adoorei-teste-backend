@@ -19,7 +19,23 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 class SaleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/sales",
+     *     summary="Retorna todas as vendas registradas",
+     *     tags={"Sales"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem sucedida",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Sale")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function index()
     {
@@ -31,7 +47,49 @@ class SaleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/sales",
+     *     summary="Cria uma nova venda",
+     *     tags={"Sales"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Dados da venda",
+     *         @OA\JsonContent(
+     *             required={"name", "price", "amount", "products"},
+     *             @OA\Property(property="name", type="string", example="Venda de Teste"),
+     *             @OA\Property(property="price", type="number", format="float", example=100.50),
+     *             @OA\Property(property="amount", type="integer", example=2),
+     *             @OA\Property(
+     *                 property="products",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     required={"product_id", "name", "price", "amount"},
+     *                     @OA\Property(property="product_id", type="integer", example=1),
+     *                     @OA\Property(property="name", type="string", example="Produto A"),
+     *                     @OA\Property(property="price", type="number", format="float", example=50.00),
+     *                     @OA\Property(property="amount", type="integer", example=1)
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Venda criada com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Sale")
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Entidade não processável",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="The products field is required.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -45,7 +103,31 @@ class SaleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/sales/{id}",
+     *     summary="Retorna uma venda específica",
+     *     tags={"Sales"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da venda",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem-sucedida",
+     *         @OA\JsonContent(ref="#/components/schemas/Sale")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Venda não encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function show(int $id)
     {
@@ -57,7 +139,48 @@ class SaleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/sales/{id}",
+     *     summary="Atualiza uma venda existente",
+     *     tags={"Sales"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da venda",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Dados da venda",
+     *         @OA\JsonContent(
+     *             required={"products"},
+     *             @OA\Property(
+     *                 property="products",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     required={"product_id", "amount"},
+     *                     @OA\Property(property="product_id", type="integer", example=2),
+     *                     @OA\Property(property="amount", type="integer", example=9)
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Venda atualizada com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Sale")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Venda não encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function update(Request $request, int $id)
     {
@@ -71,7 +194,30 @@ class SaleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/sales/{id}",
+     *     summary="Exclui uma venda existente",
+     *     tags={"Sales"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da venda a ser excluída",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Venda excluída com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Venda não encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      */
     public function destroy(int $id)
     {
