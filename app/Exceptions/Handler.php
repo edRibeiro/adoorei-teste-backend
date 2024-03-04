@@ -33,7 +33,7 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (NotFoundHttpException $e, Request $request) {
             if (!$request->is('api/*') || $request->is('api/*')) {
-                return response()->error('The specified URL cannot be found', Response::HTTP_NOT_FOUND);
+                return response()->error("Recurso não encontrado", Response::HTTP_NOT_FOUND);
             }
         });
 
