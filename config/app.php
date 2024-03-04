@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ProductServiceProvider::class,
         App\Providers\SaleServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
     ])->toArray(),
 
     /*
