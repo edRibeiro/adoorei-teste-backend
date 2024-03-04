@@ -139,21 +139,3 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou env
 
 ###### Licença
 Este projeto está licenciado sob a MIT License.
-
-## Tech Stack  
-**Client:** TypeScript, React, Next.js  
-
-**Server:** Node, Express, GraphQL  
-
-# Table of contents  
-1. [Introduction](#introduction)  
-2. [Some paragraph](#paragraph1)  
-    1. [Sub paragraph](#subparagraph1)  
-3. [Another paragraph](#paragraph2)  
-
-## Usage/Examples  
-~~~javascript  
-  import Component from 'my-project'
-
-  console.log("Hello World")
-~~~  
